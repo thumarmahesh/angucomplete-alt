@@ -94,7 +94,7 @@
         }
       });
 
-      scope.currentIndex = scope.focusFirst ? 0 : null;
+      scope.currentIndex = scope.focusFirst ? 0 : -1;
       scope.searching = false;
       unbindInitialValue = scope.$watch('initialValue', function(newval, oldval) {
         if (newval) {
@@ -370,7 +370,7 @@
           scope.$apply();
         } else if (which === KEY_DW && scope.results) {
           event.preventDefault();
-          scope.currentIndex = scope.hoverIndex;
+          scope.currentIndex = scope.hoverIndex || scope.currentIndex;
           if ((scope.currentIndex + 1) < scope.results.length && scope.showDropdown) {
             scope.$apply(function() {
               scope.currentIndex ++;
@@ -417,7 +417,9 @@
               if (scope.currentIndex === -1) {
                 scope.currentIndex = 0;
               }
-              scope.selectResult(scope.results[scope.currentIndex]);
+              if(scope.results[scope.currentIndex]){
+                scope.selectResult(scope.results[scope.currentIndex]);
+              }
               scope.$digest();
             }
           }
@@ -634,6 +636,7 @@
         }
         if (minlength === 0 && (!scope.searchStr || scope.searchStr.length === 0)) {
           scope.currentIndex = scope.focusFirst ? 0 : scope.currentIndex;
+          scope.hoverIndex = scope.currentIndex;
           scope.showDropdown = true;
           showAll();
         }
