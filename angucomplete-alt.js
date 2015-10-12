@@ -107,7 +107,7 @@
 
       scope.$watch('currentIndex', function(newVal, oldval){
         console.log(newVal);
-        if(newVal != oldval) {
+        if(newVal !== oldval) {
           scope.hoverIndex = newVal;
         }
       });
