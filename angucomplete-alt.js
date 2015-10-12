@@ -106,7 +106,6 @@
       });
 
       scope.$watch('currentIndex', function(newVal, oldval){
-        console.log(newVal);
         if(newVal !== oldval) {
           scope.hoverIndex = newVal;
         }
@@ -650,9 +649,9 @@
           hideTimer = $timeout(function() {
             clearResults();
             scope.$apply(function() {
-              if (scope.searchStr && scope.searchStr.length > 0) {
-                inputField.val(scope.searchStr);
-              }
+              //if (scope.searchStr && scope.searchStr.length > 0) {
+              inputField.val(scope.searchStr);
+              //}
             });
           }, BLUR_TIMEOUT);
           cancelHttpRequest();
