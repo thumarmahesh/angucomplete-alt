@@ -577,12 +577,18 @@
 
           for (i = 0; i < responseData.length; i++) {
             if (scope.titleField && scope.titleField !== '') {
-              text = formattedText = extractTitle(responseData[i]);
+              formattedText = extractTitle(responseData[i]);
+              if(i === 0) {
+                text = formattedText;
+              }
             }
 
             description = '';
             if (scope.descriptionField) {
-              description = formattedDesc = extractValue(responseData[i], scope.descriptionField);
+              formattedDesc = extractValue(responseData[i], scope.descriptionField);
+              if(i === 0) {
+                description = formattedDesc;
+              }
             }
 
             image = '';
@@ -591,8 +597,8 @@
             }
 
             if (scope.matchClass) {
-              formattedText = findMatchString(text, str);
-              formattedDesc = findMatchString(description, str);
+              formattedText = findMatchString(formattedText, str);
+              formattedDesc = findMatchString(formattedDesc, str);
             }
 
             scope.results[scope.results.length] = {
@@ -607,7 +613,7 @@
           scope.results = [];
         }
 
-        if (scope.autoMatch && scope.results.length === 1 &&
+        if (scope.autoMatch &&
             checkExactMatch(scope.results[0],
               {title: text, desc: description || ''}, scope.searchStr)) {
           scope.showDropdown = false;
