@@ -33,6 +33,7 @@
     var KEY_BS  =  8;
     var KEY_DEL = 46;
     var KEY_TAB =  9;
+    var KEY_CTRL = 17;
 
     var MIN_LENGTH = 3;
     var MAX_LENGTH = 524288;  // the default max length per the html maxlength attribute
@@ -252,7 +253,7 @@
 
       function keyupHandler(event) {
         var which = ie8EventNormalizer(event);
-        if (which === KEY_LF || which === KEY_RT) {
+        if (which === KEY_LF || which === KEY_RT || which === KEY_CTRL ||(event.ctrlKey && event.which === 65)) {
           // do nothing
           return;
         }
