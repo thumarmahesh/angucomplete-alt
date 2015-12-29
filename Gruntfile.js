@@ -57,13 +57,24 @@ module.exports = function (grunt) {
           'dist/angucomplete-alt.min.js': ['angucomplete-alt.js']
         }
       }
+    },
+    cssmin: {
+      options: {
+        shorthandCompacting: false,
+        roundingPrecision: -1
+      },
+      target: {
+        files: {
+          'angucomplete-alt.min.css': ['angucomplete-alt.css']
+        }
+      }
     }
   };
 
   // Register tasks
   grunt.registerTask('default', ['jshint', 'karma:unit']);
   grunt.registerTask('watch', ['jshint', 'karma:watch']);
-  grunt.registerTask('build', ['jshint', 'uglify:build']);
+  grunt.registerTask('build', ['jshint', 'uglify:build', 'cssmin']);
 
   grunt.initConfig(initConfig);
 };
